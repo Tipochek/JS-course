@@ -23,6 +23,41 @@ for ( let i = 0; i < 2; i++ ){
 	}
 };
 
+
+/* WHILE */
+
+// let i = 0;
+// while (i < 2){
+// 	let a = prompt('№' + (i+1) + ' Введите обязательную статью расходов в этом месяце', ''),
+// 		b = prompt('№' + (i+1) + ' Во сколько обойдется ?', '');
+
+// 	if ( (typeof(a)) === 'string' && (typeof(a)) != null && (typeof(b)) != null && a != '' && b != '' && a.length < 50 ){
+// 		console.log("done");
+// 		appData.expenses[a] = b;
+// 	} else {
+// 		i = (i-1);
+// 	}
+// 	i++;
+// };
+
+
+/* DO */
+
+// let i = 0;
+// do {
+// 	let a = prompt('№' + (i+1) + ' Введите обязательную статью расходов в этом месяце', ''),
+// 		b = prompt('№' + (i+1) + ' Во сколько обойдется ?', '');
+
+// 	if ( (typeof(a)) === 'string' && (typeof(a)) != null && (typeof(b)) != null && a != '' && b != '' && a.length < 50 ){
+// 		console.log("done");
+// 		appData.expenses[a] = b;
+// 	} else {
+// 		i = (i-1);
+// 	}
+// 	i++;
+// }
+// while (i < 2);
+
 appData.moneyPerDay = appData.budget / 30 ;
 
 alert('Ваш ежедневный бюджет :' + appData.moneyPerDay + ' $/day');
