@@ -60,8 +60,35 @@ appData = {
 	},
 	chooseIncome: function() {
 		let items = prompt("Что принесет дополнительный доход (перечислите через запятую)", "");
-		appData.income = items.split(", ");
-		appData.income.push(prompt("Мoжет что-то еще?"));
-		appData.income.sort();
+		let a = '';
+
+		function addMore(){
+			a = prompt("Мoжет что-то еще?");
+
+			if ( a === '') {
+				addMore();
+			} else if ( a === null ) {
+				return;
+			} else {
+				items = items + "," + a;
+			}
+		}
+
+		if ( items === '' || items === null ) {
+			appData.chooseIncome();
+		} else if (items.length > 0 ) {
+			addMore();
+			appData.income = items.split(",");
+			appData.income.sort();
+		}
+
+		appData.income.forEach(function(item, i, arr) {
+			console.log( (i + 1) + ": " + item + " (массив:" + appData.income + ")" );
+		});
 	}
 };
+appData.chooseIncome();
+
+for (let key in appData) {
+	// console.log("Наша программа включает в себя данные: " + appData[key]);
+}
