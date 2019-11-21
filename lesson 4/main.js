@@ -4,18 +4,6 @@ let date,
 	budget,
 	appData = {};
 
-function start() {
-	budget = +prompt("Ваш бюджет на месяц?" , "70000");
-
-	while( isNaN(budget) || budget == "" || budget == null ) {
-		budget = +prompt("Ваш бюджет на месяц?" , "");
-	}
-	appData.budget = budget;
-
-	date = prompt("Введите дату в формате YYYY-MM-DD", "2019-01-01");
-}
-start();
-
 appData = {
 	budget: budget,
 	expenses: {},
@@ -40,8 +28,8 @@ appData = {
 	},
 	checkSavings: function() {
 		if (appData.savings == true) {
-			let save = +promt("Какова сумма накоплений?", "1000"),
-				percent = +promt("Под какой процент?", "12");
+			let save = +prompt("Какова сумма накоплений?", "1000"),
+				percent = +prompt("Под какой процент?", "7");
 
 			appData.monthIncome = save/100/12*percent;
 			alert("Доход в месяц с вашего депозита: " + appData.monthIncome);
@@ -59,18 +47,18 @@ appData = {
 		}
 	},
 	chooseIncome: function() {
-		let items = prompt("Что принесет дополнительный доход (перечислите через запятую)", "");
+		let items = prompt("Что принесет дополнительный доход (Перечислите через запятую)", "аренда, квартплата, бизнес");
 		let a = '';
 
 		function addMore(){
-			a = prompt("Мoжет что-то еще?");
+			a = prompt("Мoжет что-то еще?", "долг2, долг3, долг1");
 
 			if ( a === '') {
 				addMore();
 			} else if ( a === null ) {
 				return;
 			} else {
-				items = items + "," + a;
+				items = items + ", " + a;
 			}
 		}
 
@@ -78,17 +66,40 @@ appData = {
 			appData.chooseIncome();
 		} else if (items.length > 0 ) {
 			addMore();
-			appData.income = items.split(",");
+			appData.income = items.split(", ");
 			appData.income.sort();
 		}
 
+		console.log("Способы доп. заработка: " + "\n" + "(" + appData.income + ")" );
 		appData.income.forEach(function(item, i, arr) {
-			console.log( (i + 1) + ": " + item + " (массив:" + appData.income + ")" );
+			console.log( (i + 1) + ": " + item );
 		});
 	}
 };
-appData.chooseIncome();
 
+function budgetInput() {
+	budget = +prompt("Ваш бюджет на месяц?" , "70000");
+
+	while( isNaN(budget) || budget == "" || budget == null ) {
+		budget = +prompt("Ваш бюджет на месяц?" , "");
+	}
+	appData.budget = budget;
+
+	date = prompt("Введите дату в формате YYYY-MM-DD", "2019-01-01");
+}
+
+function start (){
+	// budgetInput();
+	// appData.detectDayBudget();
+	// appData.detectLevel();
+	// appData.checkSavings();
+	// appData.chooseOptExpenses();
+	appData.chooseIncome();
+}
+start();
+
+// Вывод всего обьекта
+console.log("\n" + "Наша программа включает в себя данные: ");
 for (let key in appData) {
-	// console.log("Наша программа включает в себя данные: " + appData[key]);
+	console.log( '"' + key + '"' + ' имеет значение: ' + appData[key]);
 }
